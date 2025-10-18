@@ -15,6 +15,7 @@ ENV/
 
 # Credentials (IMPORTANT - Don't push sensitive data!)
 # cred.py
+.env
 
 # ngrok
 ngrok.exe
