@@ -37,7 +37,7 @@ TWILIO_ACCOUNT_SID=your_twilio_sid
 TWILIO_AUTH_TOKEN=your_twilio_token
 TWILIO_PHONE_NUMBER=+1234567890
 TELEGRAM_BOT_TOKEN=your_bot_token
-NGROK_URL=your_server_url
+SERVER_URL=your_server_url
 ```
 
 ### 4. Setup Database
@@ -56,7 +56,7 @@ python createadmin.py
 # Start ngrok
 ngrok http 5000
 
-# Update NGROK_URL in .env with the ngrok URL
+# Update SERVER_URL in .env with the ngrok URL
 
 # Run the bot
 python mainn.py
@@ -90,19 +90,22 @@ python mainn.py
    TWILIO_PHONE_NUMBER = +1234567890
    TWILIO_SMS_NUMBER = +1234567890
    TELEGRAM_BOT_TOKEN = your_telegram_bot_token
-   NGROK_URL = https://your-app.onrender.com
-   NGROK_SMS_URL = https://your-app.onrender.com/sms
+   SERVER_URL = https://your-app.onrender.com
+   SERVER_SMS_URL = https://your-app.onrender.com/sms
    ```
+   
+   **Note**: Initially set `SERVER_URL` to a placeholder. After deployment, 
+   copy your actual Render URL and update these variables.
 
 6. **Deploy**:
    - Click "Create Web Service"
    - Wait 5-10 minutes for deployment
    - Copy your Render URL: `https://techie-otp-bot.onrender.com`
 
-7. **Update Webhook URL**:
+7. **Update Server URL**:
    - Go back to Render → Environment Variables
-   - Update `NGROK_URL` with your actual Render URL
-   - Update `NGROK_SMS_URL` with your Render URL + `/sms`
+   - Update `SERVER_URL` with your actual Render URL
+   - Update `SERVER_SMS_URL` with your Render URL + `/sms`
    - Click "Save Changes" (will auto-redeploy)
 
 8. **Setup Admin**:
@@ -125,8 +128,13 @@ python mainn.py
 | `TWILIO_PHONE_NUMBER` | Twilio Phone Number | `+1234567890` |
 | `TWILIO_SMS_NUMBER` | Twilio SMS Number | `+1234567890` |
 | `TELEGRAM_BOT_TOKEN` | Telegram Bot Token | `123456:ABCdefg...` |
-| `NGROK_URL` | Server URL | `https://your-app.com` |
-| `NGROK_SMS_URL` | SMS Webhook URL | `https://your-app.com/sms` |
+| `SERVER_URL` | Server URL (Render/ngrok) | `https://your-app.onrender.com` |
+| `SERVER_SMS_URL` | SMS Webhook URL | `https://your-app.onrender.com/sms` |
+
+**Note**: 
+- For **local development**: Use ngrok URL in `SERVER_URL`
+- For **production (Render)**: Use your Render app URL
+- ngrok is only needed for local testing, not for Render deployment
 
 ## Usage 📱
 

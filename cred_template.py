@@ -14,9 +14,9 @@ twiliosmsnumber = os.getenv('TWILIO_SMS_NUMBER')
 #FC Bot
 API_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 
-#Host URL
-callurl = os.getenv('NGROK_URL')
-twiliosmsurl = os.getenv('NGROK_SMS_URL')
+#Host URL (Use Render URL in production, ngrok URL for local testing)
+callurl = os.getenv('SERVER_URL')
+twiliosmsurl = os.getenv('SERVER_SMS_URL')
 
 # Validate that all required environment variables are set
 required_vars = [
@@ -25,8 +25,8 @@ required_vars = [
     'TWILIO_PHONE_NUMBER',
     'TWILIO_SMS_NUMBER',
     'TELEGRAM_BOT_TOKEN',
-    'NGROK_URL',
-    'NGROK_SMS_URL'
+    'SERVER_URL',
+    'SERVER_SMS_URL'
 ]
 
 missing_vars = [var for var in required_vars if not os.getenv(var)]
