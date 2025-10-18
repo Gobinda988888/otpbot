@@ -7,5 +7,12 @@ if [ ! -f cred.py ]; then
     cp cred_template.py cred.py
 fi
 
+# Initialize database if it doesn't exist
+if [ ! -f UserDetails.db ]; then
+    echo "Initializing database..."
+    python dbase.py
+    python createadmin.py
+fi
+
 # Start the application with correct binding
 exec gunicorn app:app --bind 0.0.0.0:$PORT

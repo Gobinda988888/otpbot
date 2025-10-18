@@ -78,7 +78,7 @@ def send_welcome(message):
         bot.register_next_step_handler(send, saving_phonenumber)
     else:
         send = bot.send_message(message.chat.id,
-                                "*〽️TO USE THIS BOT YOU MUST BUT SUBSCRIPTION!\n\n Contact @TechieGamer TO BUY*", parse_mode='Markdown')
+                                "*❌ Access Denied!\n\nPlease contact the admin for access.*", parse_mode='Markdown')
 
 # Handle Back button - returns to /start
 @bot.message_handler(func=lambda message: message.text == "🔙 Back")
@@ -158,7 +158,7 @@ def send_text(message):
             status_callback= callurl+'/statuscallback2/'+userid,
             to=ph_no)
     except:
-        bot.send_message(chat_id, "An error has occured , contact admin @TechieGamer")
+        bot.send_message(chat_id, "An error has occurred. Please try again later.")
 
     else:
         print('Message sent sucessfully!')
