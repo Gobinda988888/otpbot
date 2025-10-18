@@ -3,7 +3,7 @@ services:
     name: techie-otp-bot
     env: python
     buildCommand: pip install -r requirements.txt && cp cred_template.py cred.py
-    startCommand: gunicorn mainn:app
+    startCommand: gunicorn mainn:app --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.7
