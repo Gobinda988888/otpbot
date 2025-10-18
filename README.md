@@ -64,23 +64,57 @@ python mainn.py
 
 ## Deploy to Render 🌐
 
-### Option 1: Automatic Deploy
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+### Quick Deploy Steps:
 
-### Option 2: Manual Deploy
+1. **Fork/Clone Repository**: https://github.com/Gobinda988888/otpbot
 
-1. **Create Render Account**: https://render.com
-2. **New Web Service**: Connect your GitHub repository
-3. **Configure**:
-   - **Build Command**: `pip install -r requirements.txt`
+2. **Create Render Account**: https://render.com (Free signup)
+
+3. **New Web Service**:
+   - Dashboard → "New +" → "Web Service"
+   - Connect your GitHub repository
+   - Select `otpbot` repository
+
+4. **Configure Service**:
+   - **Name**: `techie-otp-bot` (or any name)
+   - **Environment**: `Python 3`
+   - **Build Command**: `pip install -r requirements.txt && cp cred_template.py cred.py`
    - **Start Command**: `gunicorn mainn:app`
-   - **Environment Variables**: Add all variables from `.env`
+   - **Instance Type**: `Free`
 
-4. **Deploy**: Click "Create Web Service"
+5. **Add Environment Variables** (IMPORTANT):
+   Go to "Environment" tab and add:
+   ```
+   TWILIO_ACCOUNT_SID = your_twilio_account_sid
+   TWILIO_AUTH_TOKEN = your_twilio_auth_token
+   TWILIO_PHONE_NUMBER = +1234567890
+   TWILIO_SMS_NUMBER = +1234567890
+   TELEGRAM_BOT_TOKEN = your_telegram_bot_token
+   NGROK_URL = https://your-app.onrender.com
+   NGROK_SMS_URL = https://your-app.onrender.com/sms
+   ```
 
-5. **Update Bot Webhook**:
-   - Copy your Render URL: `https://your-app.onrender.com`
-   - Update `NGROK_URL` environment variable in Render
+6. **Deploy**:
+   - Click "Create Web Service"
+   - Wait 5-10 minutes for deployment
+   - Copy your Render URL: `https://techie-otp-bot.onrender.com`
+
+7. **Update Webhook URL**:
+   - Go back to Render → Environment Variables
+   - Update `NGROK_URL` with your actual Render URL
+   - Update `NGROK_SMS_URL` with your Render URL + `/sms`
+   - Click "Save Changes" (will auto-redeploy)
+
+8. **Setup Admin**:
+   - Once deployed, run `createadmin.py` with your Telegram user ID
+   - You can do this via Render Shell or locally with database
+
+### Troubleshooting:
+
+- **"Module not found" error**: Check `requirements.txt` has all dependencies
+- **"Environment variable missing"**: Verify all 7 variables are set in Render
+- **Bot not responding**: Check webhook URL is correct and matches Render URL
+- **Database error**: Render will create `UserDetails.db` automatically
 
 ## Environment Variables 🔐
 
