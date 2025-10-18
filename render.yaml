@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: techie-otp-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn mainn:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.7
