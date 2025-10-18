@@ -7,5 +7,5 @@ if [ ! -f cred.py ]; then
     cp cred_template.py cred.py
 fi
 
-# Start the application
-gunicorn mainn:app
+# Start the application with correct binding
+exec gunicorn app:app --bind 0.0.0.0:$PORT
